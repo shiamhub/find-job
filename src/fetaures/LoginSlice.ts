@@ -3,6 +3,7 @@ import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWith
 import app from "../firebase/firebase.config";
 
 const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
 
 export const createUser = createAsyncThunk(
     "authentication/createUser",
@@ -19,7 +20,6 @@ export const createUser = createAsyncThunk(
 export const googleLogin = createAsyncThunk(
     "authentication/googleLogin",
     async (_, { rejectWithValue }) => {
-        const provider = new GoogleAuthProvider();
         try {
             await signInWithPopup(auth, provider);
         } catch (error: any) {
